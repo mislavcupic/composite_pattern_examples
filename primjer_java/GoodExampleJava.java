@@ -46,6 +46,8 @@ class MobileProduct extends Box {
         return price;
     }
 
+    
+
 
     @Override
     public String toString() {
