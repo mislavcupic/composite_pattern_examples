@@ -1,0 +1,9 @@
+Problemi ovog pristupa:
+Nekompatibilnost različitih tipova proizvoda: SimpleBox može pohraniti samo SimpleProduct objekte,
+ što znači da ne možete dodati MobilePhoneProduct objekte.
+Ako želite dodati MobilePhoneProduct, trebali biste stvoriti novu klasu MobilePhoneBox koja može pohraniti MobilePhoneProduct.
+Ponavljanje koda za različite kutije: Ako želimo proširiti aplikaciju i dodati još vrsta proizvoda (kao što su BananaProduct ili SneakerProduct), morat ćemo stvoriti dodatne klase kutija 
+(npr. BananaBox, SneakerBox) za svaki novi tip, što značajno povećava količinu koda i smanjuje fleksibilnost.
+Prednosti Composite Patterna
+Kada koristite Composite Pattern, možete implementirati zajedničko sučelje Box, a sve vrste proizvoda 
+(npr. SimpleProduct, MobilePhoneProduct) će implementirati to sučelje. Na taj način CompositeBox može držati različite vrste proizvoda bez dodatne logike.

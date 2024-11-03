@@ -30,6 +30,29 @@ class Product extends Box {
     }
 }
 
+class MobileProduct extends Box {
+    private String title;
+    private double price;
+    private int warranty;
+
+    public MobileProduct(String title, double price, int warranty) {
+        this.title = title;
+        this.price = price;
+        this.warranty = warranty;
+    }
+
+    @Override
+    public double calculatePrice() {
+        return price;
+    }
+
+
+    @Override
+    public String toString() {
+        return "- " + title + ": $" + String.format("%.2f", price) + ": $"+ warranty;
+    }
+}
+
 // Composite class to hold multiple boxes or products
 class CompositeBox extends Box {
     private List<Box> children = new ArrayList<>();
@@ -64,9 +87,10 @@ class CompositeBox extends Box {
         Product product1 = new Product("Product 1", 10.0);
         Product product2 = new Product("Product 2", 15.0);
         Product product3 = new Product("Product 3", 20.0);
+        MobileProduct mobileProduct = new MobileProduct("Mobile phone", 2500.0, 24);
 
         // Create a composite box with products
-        CompositeBox compositeBox = new CompositeBox(product1, product2, product3);
+        CompositeBox compositeBox = new CompositeBox(product1, product2, product3, mobileProduct);
 
         // Print the details of the composite box
         System.out.println(compositeBox);

@@ -6,6 +6,16 @@ class Box:
     def calculate_price(self) -> float:
         raise NotImplementedError("Subclasses should implement this method.")
 
+#i ovdje ću dati primjer s različitim Productima
+# class MobileProduct(Box):
+#     def __init__(self, title: str, price: float, warranty: int):
+#         self._title = title
+#         self._price = price
+#         self.warranty = warranty
+
+# # operation function from diagram, available in all implementations
+#     def calculate_price(self) -> float:
+#         return self._price
 
 class Product(Box):
     def __init__(self, title: str, price: float):
@@ -15,7 +25,6 @@ class Product(Box):
 # operation function from diagram, available in all implementations
     def calculate_price(self) -> float:
         return self._price
-
 
 class CompositeBox(Box):
     def __init__(self, *boxes: Box):
@@ -36,7 +45,8 @@ if __name__ == "__main__":
     products = [
         Product("Product 1", 10.0),
         Product("Product 2", 15.0),
-        Product("Product 3", 20.0)
+        Product("Product 3", 20.0),
+        #MobileProduct("Mobile 1",200.0, 12)
     ]
 
     composite_box = CompositeBox(*products)
