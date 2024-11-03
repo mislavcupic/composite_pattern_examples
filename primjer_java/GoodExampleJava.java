@@ -46,13 +46,13 @@ class MobileProduct extends Box {
         return price;
     }
 
-    
 
 
-    @Override
-    public String toString() {
-        return "- " + title + ": $" + String.format("%.2f", price) + ": $"+ warranty;
-    }
+@Override
+public String toString() {
+    return "- " + title + ": $" + String.format("%.2f", price) + " (Warranty: " + warranty + " months)";
+}
+  
 }
 
 // Composite class to hold multiple boxes or products
@@ -83,18 +83,15 @@ class CompositeBox extends Box {
     }
 }
 
- class Main {
+class Main {
     public static void main(String[] args) {
-        // Create individual products
         Product product1 = new Product("Product 1", 10.0);
         Product product2 = new Product("Product 2", 15.0);
         Product product3 = new Product("Product 3", 20.0);
         MobileProduct mobileProduct = new MobileProduct("Mobile phone", 2500.0, 24);
 
-        // Create a composite box with products
         CompositeBox compositeBox = new CompositeBox(product1, product2, product3, mobileProduct);
-
-        // Print the details of the composite box
-        System.out.println(compositeBox);
+        
+        System.out.println(compositeBox);  // Print composite box contents
     }
 }
