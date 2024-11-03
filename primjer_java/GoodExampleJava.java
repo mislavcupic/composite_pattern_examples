@@ -29,7 +29,8 @@ class Product extends Box {
         return "- " + title + ": $" + String.format("%.2f", price);
     }
 }
-
+/*dodajemo ovu klasu i koliko god koje nasljeđuju abstract klasu Box, 
+ne moraju biti iste kao prvi product, mogu imati neke dodatne propertyje (ili implementiraju sučelje Box)*/
 class MobileProduct extends Box {
     private String title;
     private double price;
@@ -46,12 +47,10 @@ class MobileProduct extends Box {
         return price;
     }
 
-
-
-@Override
-public String toString() {
-    return "- " + title + ": $" + String.format("%.2f", price) + " (Warranty: " + warranty + " months)";
-}
+    @Override
+    public String toString() {
+        return "- " + title + ": $" + String.format("%.2f", price) + " (Warranty: " + warranty + " months)";
+    }
   
 }
 
@@ -81,13 +80,14 @@ class CompositeBox extends Box {
         productDetails.append("Total price of the box: $").append(String.format("%.2f", calculatePrice()));
         return productDetails.toString();
     }
-}
 
-class Main {
+
+
     public static void main(String[] args) {
         Product product1 = new Product("Product 1", 10.0);
         Product product2 = new Product("Product 2", 15.0);
         Product product3 = new Product("Product 3", 20.0);
+        //dodamo ovu liniju
         MobileProduct mobileProduct = new MobileProduct("Mobile phone", 2500.0, 24);
 
         CompositeBox compositeBox = new CompositeBox(product1, product2, product3, mobileProduct);
@@ -95,3 +95,4 @@ class Main {
         System.out.println(compositeBox);  // Print composite box contents
     }
 }
+

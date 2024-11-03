@@ -65,9 +65,7 @@ class SimpleBox {
         }
         System.out.printf("Ukupna cijena kutije: $%.2f%n", calculateTotalPrice());
     }
-}
 
- class Main {
     public static void main(String[] args) {
         // Stvaranje proizvoda
         SimpleProduct product1 = new SimpleProduct("Proizvod 1", 10.0);
