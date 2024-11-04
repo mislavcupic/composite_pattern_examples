@@ -6,7 +6,7 @@ class Box:
     def calculate_price(self) -> float:
         raise NotImplementedError("Subclasses should implement this method.")
 
-#i ovdje ću dati primjer s različitim Productima
+#i example with different type of product
 class MobileProduct(Box):
     def __init__(self, title: str, price: float, warranty: int):
         self._title = title
@@ -26,6 +26,7 @@ class Product(Box):
     def calculate_price(self) -> float:
         return self._price
 
+#unlike SimpleBox, MobileBox, NestedBox, CompositeBox doesn't care what type of Box is added
 class CompositeBox(Box):
     def __init__(self, *boxes: Box):
         self._children = list(boxes)
@@ -56,12 +57,12 @@ if __name__ == "__main__":
     composite_box = CompositeBox(*products)
     print(composite_box)
 
-    # we can do it this way - create few products and then put them in some way in CompositeBox
+    # but still, CompositeBox can take order its boxes and products in different ways
     product1 = Product("Product 1",21.00)
     product2 = Product("Product 2",24.00)
     product3 = Product("Product 3",29.00)
     product4 = MobileProduct("Mobile 4",2340.0,12)
-    # Create a nested box containing some products
+    # in composite, nesting is solved in one line of code
     inner_box = CompositeBox(product1, product2, product4)
     
     # Create an outer box containing products and the inner box
