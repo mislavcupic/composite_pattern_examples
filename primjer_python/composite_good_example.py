@@ -7,15 +7,15 @@ class Box:
         raise NotImplementedError("Subclasses should implement this method.")
 
 #i ovdje ću dati primjer s različitim Productima
-# class MobileProduct(Box):
-#     def __init__(self, title: str, price: float, warranty: int):
-#         self._title = title
-#         self._price = price
-#         self.warranty = warranty
+class MobileProduct(Box):
+    def __init__(self, title: str, price: float, warranty: int):
+        self._title = title
+        self._price = price
+        self.warranty = warranty
 
-# # operation function from diagram, available in all implementations
-#     def calculate_price(self) -> float:
-#         return self._price
+# operation function from diagram, available in all implementations
+    def calculate_price(self) -> float:
+        return self._price
 
 class Product(Box):
     def __init__(self, title: str, price: float):
@@ -36,12 +36,16 @@ class CompositeBox(Box):
 
 
     def __str__(self):
-        product_details = "\n".join(f"- {child._title}: ${child.calculate_price():.2f}" for child in self._children)
+        product_details = "\n".join(
+            f"- {child._title}: ${child.calculate_price():.2f}" if isinstance(child, Product) 
+            else f"- Nested box total: ${child.calculate_price():.2f}"
+            for child in self._children
+        )
         total_price = self.calculate_price()
-        return f"Proizvodi u composite box:\n{product_details}\n Total price of the box: ${total_price:.2f}"
-    
+        return f"Products in composite box:\n{product_details}\nTotal price of the box: ${total_price:.2f}"
 
 if __name__ == "__main__":
+    #stvaranje pojedinačnih proizvoda i stavljanje u kutiju na jedan način
     products = [
         Product("Product 1", 10.0),
         Product("Product 2", 15.0),
@@ -51,3 +55,17 @@ if __name__ == "__main__":
 
     composite_box = CompositeBox(*products)
     print(composite_box)
+
+    # we can do it this way - create few products and then put them in some way in CompositeBox
+    product1 = Product("Product 1",21.00)
+    product2 = Product("Product 2",24.00)
+    product3 = Product("Product 3",29.00)
+    product4 = MobileProduct("Mobile 4",2340.0,12)
+    # Create a nested box containing some products
+    inner_box = CompositeBox(product1, product2, product4)
+    
+    # Create an outer box containing products and the inner box
+    outer_box = CompositeBox(inner_box, product3)
+
+    # Print out the details of the outer box
+    print("Outer box price: ",outer_box)
