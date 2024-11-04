@@ -1,9 +1,33 @@
-Problemi ovog pristupa:
-Nekompatibilnost različitih tipova proizvoda: SimpleBox može pohraniti samo SimpleProduct objekte,
- što znači da ne možete dodati MobilePhoneProduct objekte.
-Ako želite dodati MobilePhoneProduct, trebali biste stvoriti novu klasu MobilePhoneBox koja može pohraniti MobilePhoneProduct.
-Ponavljanje koda za različite kutije: Ako želimo proširiti aplikaciju i dodati još vrsta proizvoda (kao što su BananaProduct ili SneakerProduct), morat ćemo stvoriti dodatne klase kutija 
-(npr. BananaBox, SneakerBox) za svaki novi tip, što značajno povećava količinu koda i smanjuje fleksibilnost.
-Prednosti Composite Patterna
-Kada koristite Composite Pattern, možete implementirati zajedničko sučelje Box, a sve vrste proizvoda 
-(npr. SimpleProduct, MobilePhoneProduct) će implementirati to sučelje. Na taj način CompositeBox može držati različite vrste proizvoda bez dodatne logike.
+Structural patterns deal with object composition and help ensure that if one part of a system changes, the entire system doesn't need to change.
+
+COMPOSITE IS STRUCTURAL
+Composite obrazac dizajna je klasificiran kao strukturni obrazac jer se bavi načinom na koji su objekti sastavljeni u složene strukture i omogućava rad s tim strukturama na uniforman način. Poglejmo zašto je to strukturalni obrazac i kako se primjenjuju SOLID principi na našem primjeru s klasama Box, Product, MobileProduct i CompositeBox.
+
+Zašto je Composite strukturni obrazac?
+Hijerarhijska struktura: Composite obrazac omogućava stvaranje hijerarhijskih struktura koje predstavljaju sastav objekata. U našem primjeru, CompositeBox može sadržavati i jednostavne proizvode (Product) i druge kompozitne kutije (CompositeBox). Ova fleksibilnost omogućava modeliranje složenih objekata na jednostavan način.
+
+Uniformno sučelje: Korištenjem apstraktne klase Box kao zajedničkog sučelja, klijent može raditi s različitim vrstama proizvoda i kutija na isti način. Metoda calculate_price() je dostupna svim klasama koje nasljeđuju Box, što pojednostavljuje interakciju s objektima.
+
+Prednosti u kontekstu SOLID principa
+S - Single Responsibility Principle (SRP)
+Jedinstvena odgovornost: Svaka klasa u našem primjeru ima svoju specifičnu odgovornost:
+
+Product se brine o pojedinačnom proizvodu i njegovoj cijeni.
+MobileProduct dodaje dodatnu funkcionalnost u obliku jamstva, ali ostaje fokusirana na proizvod.
+CompositeBox upravlja kolekcijom proizvoda i računa ukupnu cijenu.
+Ova jasna podjela odgovornosti olakšava održavanje i razumijevanje koda.
+
+O - Open/Closed Principle (OCP)
+Otvoreno/zatvoreno načelo: Naše klase su otvorene za proširenje, ali zatvorene za izmjene. Na primjer, ako želimo dodati novi tip proizvoda, možemo jednostavno stvoriti novu klasu koja nasljeđuje Box bez potrebe za izmjenom postojećih klasa. Ovo smanjuje rizik od uvođenja grešaka u već postojeći kod.
+
+L - Liskov Substitution Principle (LSP)
+Liskova zamjena: Objekte klase Product, MobileProduct i CompositeBox možemo koristiti na bilo kojem mjestu gdje očekujemo Box. Na primjer, u CompositeBox, možemo dodati bilo koji objekt koji nasljeđuje Box i program će ispravno raditi. Ova princip omogućava zamjenu jednog tipa objekta s drugim bez narušavanja funkcionalnosti.
+
+I - Interface Segregation Principle (ISP)
+Načelo segregacije sučelja: Iako u ovom primjeru imamo jedno zajedničko sučelje (apstraktnu klasu Box), ono je jednostavno i ne prisiljava klijente da implementiraju metode koje ne koriste. Svaka konkretna klasa implementira samo one metode koje su joj potrebne.
+
+D - Dependency Inversion Principle (DIP)
+Načelo inverzije ovisnosti: Ovisnosti u našem primjeru su uspostavljene preko apstraktnih klasa. Klijenti ovisiti o apstrakcijama (Box), a ne o konkretnoj implementaciji. Na taj način se smanjuje povezanost između klasa, što olakšava promjene i održavanje.
+
+Zaključak
+Composite obrazac dizajna predstavlja učinkovit način za upravljanje složenim strukturnim sustavima. U našem primjeru, on omogućava rad s različitim tipovima proizvoda i kutija na dosljedan način, što je izuzetno korisno u kontekstu SOLID principa. Ovaj pristup donosi mnoge prednosti, uključujući bolju modularnost, lakše održavanje i veću fleksibilnost prilikom proširivanja sustava. Sve to čini Composite obrazac odličnim izborom za rješavanje složenih problema u programiranju.
