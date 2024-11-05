@@ -9,6 +9,7 @@ class SimpleProduct:
     def display(self):
         return f"{self._title}: ${self._price:.2f}"
 
+
 class MobilePhoneProduct:
     def __init__(self, title: str, price: float, warranty: int):
         self._title = title
@@ -21,7 +22,8 @@ class MobilePhoneProduct:
     def display(self):
         return f"{self._title}: ${self._price:.2f} (Warranty: {self.warranty} months)"
 
-# Box that can only store SimpleProducts
+
+# Box that can only store SimpleProducts 
 class SimpleBox:
     def __init__(self):
         self._products = []
@@ -39,6 +41,7 @@ class SimpleBox:
         product_details = "\n".join(f"- {product.display()}" for product in self._products)
         total_price = self.calculate_total_price()
         return f"SimpleBox:\n{product_details}\nTotal price: ${total_price:.2f}"
+
 
 # A different box class that can store MobilePhoneProducts only
 class MobilePhoneBox:
@@ -59,6 +62,7 @@ class MobilePhoneBox:
         total_price = self.calculate_total_price()
         return f"MobilePhoneBox:\n{product_details}\nTotal price: ${total_price:.2f}"
 
+
 # NestedBox attempts to handle both SimpleBox and MobilePhoneBox, but this adds complexity
 class NestedBox:
     def __init__(self):
@@ -78,6 +82,7 @@ class NestedBox:
         total_price = self.calculate_total_price()
         return f"NestedBox:\n{nested_details}\nTotal price of all nested boxes: ${total_price:.2f}"
 
+
 if __name__ == "__main__":
     # Creating simple products
     product1 = SimpleProduct("Product 1", 10.0)
@@ -88,8 +93,9 @@ if __name__ == "__main__":
     simple_box = SimpleBox()
     simple_box.add_product(product1)
     simple_box.add_product(product2)
-    #PROBLEM!!!  raise TypeError("SimpleBox can only contain SimpleProduct instances") 
-    #simple_box.add_product(mobile_product)
+    
+    # Ovaj poziv će izazvati grešku jer SimpleBox ne može primiti MobilePhoneProduct
+    # simple_box.add_product(mobile_product)
 
     # Creating MobilePhoneBox with a MobilePhoneProduct
     mobile_phone_box = MobilePhoneBox()
